@@ -13,7 +13,7 @@ interface ApiService {
     fun getLoansList(@Query("") token: String): Call<Loan>
 
     @POST("registration")
-    fun createUser(@Body userInfo: UserInfo): Call<UserInfo>
+    fun registerUser(@Body userInfo: UserInfo): Call<UserInfo>
 
     @POST("login")
     fun loginUser(@Body userInfo: UserInfo): Call<String>
