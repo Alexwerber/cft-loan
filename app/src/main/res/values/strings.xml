@@ -6,4 +6,5 @@
     <string name="password">Пароль</string>
     <string name="login">Логин</string>
     <string name="registration_header">Создать новый аккаут</string>
+    <string name="login_header">Войти в аккаунт</string>
 </resources>
