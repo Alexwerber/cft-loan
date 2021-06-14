@@ -1,3 +1,10 @@
 <resources>
-    <string name="app_name">cft-loan</string>
+    <string name="app_name">ЦФТ займы</string>
+    <string name="go_to_login"><u>Войти здесь</u></string>
+    <string name="are_you_already_registered">Вы уже зарегистрированы?</string>
+    <string name="confirm">подтверждаю</string>
+    <string name="password">Пароль</string>
+    <string name="login">Логин</string>
+    <string name="registration_header">Создать новый аккаут</string>
+    <string name="login_header">Войти в аккаунт</string>
 </resources>
