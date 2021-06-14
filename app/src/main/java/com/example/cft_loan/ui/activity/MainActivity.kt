@@ -15,36 +15,9 @@ import retrofit2.Response
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
-    @Inject
-    lateinit var apiService: ApiService
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        LoanApp.appComponents.inject(this)
-
-
-        confirm_button.setOnClickListener {
-            Log.i("wwwww", "on click")
-            Log.i("wwwww", edit_name.text.toString())
-            Log.i("wwwww", edit_password.text.toString())
-
-            registerUser(edit_name.text.toString(), edit_password.text.toString())
-            it.setOnClickListener(null)
-        }
-    }
-
-    private fun registerUser(name: String, password: String) {
-        apiService.registerUser(UserInfo(name, password)).enqueue(object: Callback<UserInfo> {
-            override fun onResponse(call: Call<UserInfo>, response: Response<UserInfo>) {
-                Log.i("wwww", response.body().toString())
-            }
-
-            override fun onFailure(call: Call<UserInfo>, t: Throwable) {
-
-            }
-
-        })
     }
 }
