@@ -29,6 +29,7 @@ class LoginFragment: Fragment(R.layout.fragment_login) {
             if(checkInput.checkLogin(login) && checkInput.checkPassword(password)) {
                 val userInfo = UserInfo(login, password)
                 loanViewModel.loginUser(userInfo)
+                // when get token go to loan list
             }
         }
     }

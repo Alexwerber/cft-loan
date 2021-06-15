@@ -19,7 +19,8 @@ class Repository {
     fun registerUser(userInfo: UserInfo) {
         apiService.registerUser(userInfo).enqueue(object: Callback<UserInfo>{
             override fun onResponse(call: Call<UserInfo>, response: Response<UserInfo>) {
-
+                response.isSuccessful.let { //saveUserInfoToDB
+                }
             }
 
             override fun onFailure(call: Call<UserInfo>, t: Throwable) {
@@ -31,7 +32,9 @@ class Repository {
     fun loginUser(userInfo: UserInfo) {
         apiService.loginUser(userInfo).enqueue(object: Callback<String>{
             override fun onResponse(call: Call<String>, response: Response<String>) {
-
+                response.isSuccessful.let { //saveTokenToDB
+                    //saveUserInfoToDB
+                 }
             }
 
             override fun onFailure(call: Call<String>, t: Throwable) {
