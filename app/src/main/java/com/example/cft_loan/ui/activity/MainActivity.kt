@@ -8,6 +8,7 @@ import com.example.cft_loan.LoanApp
 import com.example.cft_loan.R
 import com.example.cft_loan.data.entities.UserInfo
 import com.example.cft_loan.data.remote.ApiService
+import com.example.cft_loan.viewmodel.LoanViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 import retrofit2.Call
 import retrofit2.Callback
