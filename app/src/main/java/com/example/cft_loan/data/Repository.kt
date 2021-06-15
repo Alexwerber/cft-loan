@@ -10,7 +10,7 @@ import javax.inject.Inject
 
 class Repository {
     @Inject
-    private lateinit var apiService: ApiService
+    lateinit var apiService: ApiService
 
     init {
         LoanApp.appComponents.inject(this)
