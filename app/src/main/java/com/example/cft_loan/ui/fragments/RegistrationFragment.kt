@@ -14,6 +14,8 @@ class RegistrationFragment: Fragment(R.layout.fragment_registration) {
     override fun onStart() {
         super.onStart()
 
+
+
         if_user_already_registered.setOnClickListener {
             activity?.let {
                 it.supportFragmentManager
