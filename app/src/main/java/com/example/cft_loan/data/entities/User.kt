@@ -13,7 +13,7 @@ data class User(
         var password: String?,
         var firstName: String?,
         var lastName: String?,
-        var token: String?
+        var token: String? = ""
 )
 
 class UserBuilder() {

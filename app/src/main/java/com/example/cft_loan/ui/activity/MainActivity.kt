@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import com.example.cft_loan.LoanApp
 import com.example.cft_loan.R
 import com.example.cft_loan.data.entities.UserInfo
@@ -16,9 +18,20 @@ import retrofit2.Response
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
+    private lateinit var loanViewModel: LoanViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        loanViewModel = ViewModelProvider(this).get(LoanViewModel::class.java)
+
+        loanViewModel.userData.observe(this, {
+            if(it.token != "") goToLoanList()
+        })
+    }
+
+    private fun goToLoanList() {
+        // go to loan fragment
     }
 }

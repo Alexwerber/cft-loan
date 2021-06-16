@@ -31,13 +31,5 @@ class LoginFragment: Fragment(R.layout.fragment_login) {
                 loanViewModel.loginUser(userInfo)
             }
         }
-
-        loanViewModel.userData.observe(requireActivity(), {
-            if(it.token != "") goToLoanList()
-        })
-    }
-
-    private fun goToLoanList() {
-        //go to loan list fragment
     }
 }
