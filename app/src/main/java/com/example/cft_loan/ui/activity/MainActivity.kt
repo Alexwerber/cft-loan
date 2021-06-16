@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
         loanViewModel = ViewModelProvider(this).get(LoanViewModel::class.java)
 
         loanViewModel.userData.observe(this, {
-            if(it.token != "") goToLoanList()
+            it?.let { if(it.token != "") goToLoanList() }
         })
     }
 
