@@ -30,7 +30,6 @@ class RegistrationFragment: Fragment(R.layout.fragment_registration) {
             if(checkInput.checkLogin(login) && checkInput.checkPassword(password)) {
                 val userInfo = UserInfo(login, password)
                 loanViewModel.registerUser(userInfo)
-                // if user already registered go to login fragment
             }
         }
 
