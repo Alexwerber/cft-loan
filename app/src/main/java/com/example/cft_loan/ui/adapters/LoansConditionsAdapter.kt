@@ -45,14 +45,16 @@ class LoansConditionsAdapter: RecyclerView.Adapter<LoansConditionsAdapter.ViewHo
         holder.conditionAmount.text = loanCondition.maxAmount.toString()
 
         holder.root.setOnClickListener() {
+            val createLoanFragment = CreateLoanFragment()
             val bundle: Bundle = fillValuesForCreateLoan(
                                             loanCondition.percent,
                                             loanCondition.period,
                                             loanCondition.maxAmount)
+            createLoanFragment.arguments = bundle
 
             context.supportFragmentManager
                             .beginTransaction()
-                            .replace(R.id.fragment_container, CreateLoanFragment())
+                            .replace(R.id.fragment_container, createLoanFragment)
                             .addToBackStack(null)
                             .commit()
         }

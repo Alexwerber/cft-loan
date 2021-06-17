@@ -34,7 +34,6 @@ class LoansConditionsFragment: Fragment(R.layout.fragment_loans_conditions) {
         }
 
         loanViewModel.getLoansConditions().observe(requireActivity(), {
-            Log.i("wwww", "sdfsdfsdfsdfsdf")
             adapter.setData(it)
         })
     }
