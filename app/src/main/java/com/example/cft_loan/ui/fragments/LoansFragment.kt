@@ -19,7 +19,11 @@ class LoansFragment: Fragment(R.layout.fragment_loan_list) {
     override fun onStart() {
         super.onStart()
         go_to_loans_conditions.setOnClickListener() {
-
+            requireActivity().supportFragmentManager
+                .beginTransaction()
+                .replace(R.id.fragment_container, LoansConditionsFragment())
+                .addToBackStack(null)
+                .commit()
         }
     }
 }

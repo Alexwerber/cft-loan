@@ -10,9 +10,9 @@ import com.example.cft_loan.data.entities.LoanCondition
 
 class LoansConditionsAdapter: RecyclerView.Adapter<LoansConditionsAdapter.ViewHolder>() {
     private lateinit var context: FragmentActivity
-    private var loansConditions: List<LoanCondition> = emptyList()
+    private var loansConditions: MutableList<LoanCondition?> = mutableListOf()
 
-    fun setData(list: List<LoanCondition>) {
+    fun setData(list: MutableList<LoanCondition?>) {
         loansConditions = list
         notifyDataSetChanged()
     }

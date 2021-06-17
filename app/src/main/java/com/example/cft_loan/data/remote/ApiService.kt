@@ -21,6 +21,6 @@ interface ApiService {
     fun loginUser(@Body userInfo: UserInfo): Call<String>
 
     @GET("loans/conditions")
-    fun getLoansConditions(): Call<LoanCondition>
+    fun getLoansConditions(@Query("Authorization: ") token: String): Call<LoanCondition>
 
 }

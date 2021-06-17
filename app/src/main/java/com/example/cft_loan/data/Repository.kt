@@ -1,6 +1,7 @@
 package com.example.cft_loan.data
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.example.cft_loan.LoanApp
 import com.example.cft_loan.data.entities.*
 import com.example.cft_loan.data.local.dao.LoanDao
@@ -17,12 +18,16 @@ class Repository {
     @Inject
     lateinit var loanDao: LoanDao
 
+    private var loansConditions: MutableLiveData<MutableList<LoanCondition?>> = MutableLiveData()
+
     init {
         LoanApp.appComponents.inject(this)
     }
 
     fun getUserData(): LiveData<User> = loanDao.getUserData()
     fun getLoanList(): LiveData<List<Loan>> = loanDao.getLoans()
+
+    fun getLoansConditions(): MutableLiveData<MutableList<LoanCondition?>> = loansConditions
 
     fun registerUser(userInfo: UserInfo) {
         apiService.registerUser(userInfo).enqueue(object: Callback<UserInfo>{
@@ -71,6 +76,31 @@ class Repository {
 
             }
         })
+    }
+
+    fun getLoansConditionsFromServer(token: String) {
+        var id = 0
+        val listOfConditions: MutableList<LoanCondition?> = mutableListOf()
+
+        while (id < 10) {
+            apiService.getLoansConditions(token).enqueue(object : Callback<LoanCondition> {
+                override fun onResponse(
+                    call: Call<LoanCondition>,
+                    response: Response<LoanCondition>
+                ) {
+                    listOfConditions.add(
+                        index = id,
+                        element = response.body())
+                }
+
+                override fun onFailure(call: Call<LoanCondition>, t: Throwable) {
+
+                }
+            })
+            id++
+        }
+
+        loansConditions.value = listOfConditions
     }
 
     private fun saveDataToDb(userData: User) {
