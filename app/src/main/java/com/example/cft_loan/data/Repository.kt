@@ -1,11 +1,8 @@
 package com.example.cft_loan.data
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import com.example.cft_loan.LoanApp
-import com.example.cft_loan.data.entities.User
-import com.example.cft_loan.data.entities.UserBuilder
-import com.example.cft_loan.data.entities.UserInfo
+import com.example.cft_loan.data.entities.*
 import com.example.cft_loan.data.local.dao.LoanDao
 import com.example.cft_loan.data.remote.ApiService
 import retrofit2.Call
@@ -25,6 +22,7 @@ class Repository {
     }
 
     fun getUserData(): LiveData<User> = loanDao.getUserData()
+    fun getLoanList(): LiveData<List<Loan>> = loanDao.getLoans()
 
     fun registerUser(userInfo: UserInfo) {
         apiService.registerUser(userInfo).enqueue(object: Callback<UserInfo>{
@@ -48,6 +46,8 @@ class Repository {
                             .setToken(response.body().toString())
                             .build()
                     )
+
+                    getLoanListFromServer(response.body().toString())
                  }
             }
 
@@ -57,9 +57,31 @@ class Repository {
         })
     }
 
+    fun getLoanListFromServer(token: String) {
+        apiService.getLoansList(token).enqueue(object: Callback<LoanList>{
+            override fun onResponse(call: Call<LoanList>, response: Response<LoanList>) {
+                response.isSuccessful.apply {
+                    response.body()?.let {
+                        saveLoansToDb(it.loanList)
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<LoanList>, t: Throwable) {
+
+            }
+        })
+    }
+
     private fun saveDataToDb(userData: User) {
         Executors.newSingleThreadExecutor().execute(
                 fun () {loanDao.saveUserData(userData)}
+        )
+    }
+
+    private fun saveLoansToDb(loanList: List<Loan>) {
+        Executors.newSingleThreadExecutor().execute(
+            fun () {loanDao.saveLoans(loanList)}
         )
     }
 }

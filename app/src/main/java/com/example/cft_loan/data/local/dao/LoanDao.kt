@@ -5,6 +5,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import com.example.cft_loan.data.entities.Loan
 import com.example.cft_loan.data.entities.User
 
 @Dao
@@ -14,4 +15,10 @@ interface LoanDao {
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun saveUserData(user: User)
+
+    @Query("SELECT * FROM loan")
+    fun getLoans(): LiveData<List<Loan>>
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun saveLoans(loansList: List<Loan>)
 }
