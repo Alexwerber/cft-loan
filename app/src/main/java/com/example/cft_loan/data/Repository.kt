@@ -1,8 +1,10 @@
 package com.example.cft_loan.data
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.cft_loan.LoanApp
+import com.example.cft_loan.data.entities.LoanList
 import com.example.cft_loan.data.entities.User
 import com.example.cft_loan.data.entities.UserBuilder
 import com.example.cft_loan.data.entities.UserInfo
@@ -24,7 +26,10 @@ class Repository {
         LoanApp.appComponents.inject(this)
     }
 
+    private var loanList: MutableLiveData<LoanList> = MutableLiveData()
+
     fun getUserData(): LiveData<User> = loanDao.getUserData()
+    fun getLoanList(): MutableLiveData<LoanList> = loanList
 
     fun registerUser(userInfo: UserInfo) {
         apiService.registerUser(userInfo).enqueue(object: Callback<UserInfo>{
@@ -42,6 +47,7 @@ class Repository {
         apiService.loginUser(userInfo).enqueue(object: Callback<String>{
             override fun onResponse(call: Call<String>, response: Response<String>) {
                 response.isSuccessful.apply {
+                    Log.i("ssssss", response.toString())
                     saveDataToDb(UserBuilder()
                             .setName(userInfo.name)
                             .setPassword(userInfo.password)
@@ -52,6 +58,20 @@ class Repository {
             }
 
             override fun onFailure(call: Call<String>, t: Throwable) {
+
+            }
+        })
+    }
+
+    fun getLoanList(token: String) {
+        apiService.getLoansList(token).enqueue(object: Callback<LoanList>{
+            override fun onResponse(call: Call<LoanList>, response: Response<LoanList>) {
+                response.isSuccessful.apply {
+                    loanList.value = response.body()
+                }
+            }
+
+            override fun onFailure(call: Call<LoanList>, t: Throwable) {
 
             }
         })

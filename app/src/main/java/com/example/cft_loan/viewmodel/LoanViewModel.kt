@@ -17,4 +17,12 @@ class LoanViewModel: ViewModel() {
     fun loginUser(userInfo: UserInfo) {
         repository.loginUser(userInfo)
     }
+
+    fun getLoanListFromServer(token: String) {
+        repository.getLoanList(token)
+    }
+
+    fun getLoanList() {
+        repository.getLoanList()
+    }
 }
