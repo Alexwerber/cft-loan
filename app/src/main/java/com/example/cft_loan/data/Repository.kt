@@ -1,6 +1,8 @@
 package com.example.cft_loan.data
 
+import android.util.Log
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.example.cft_loan.LoanApp
 import com.example.cft_loan.data.entities.*
 import com.example.cft_loan.data.local.dao.LoanDao
@@ -8,14 +10,20 @@ import com.example.cft_loan.data.remote.ApiService
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.io.IOException
 import java.util.concurrent.Executors
 import javax.inject.Inject
 
 class Repository {
+    var sizeOfCall = 5
+
     @Inject
     lateinit var apiService: ApiService
     @Inject
     lateinit var loanDao: LoanDao
+
+    private val loansConditions: MutableLiveData<List<LoanCondition>> = MutableLiveData()
+    private val conditionsArray = ArrayList<LoanCondition>()
 
     init {
         LoanApp.appComponents.inject(this)
@@ -23,6 +31,8 @@ class Repository {
 
     fun getUserData(): LiveData<User> = loanDao.getUserData()
     fun getLoanList(): LiveData<List<Loan>> = loanDao.getLoans()
+
+    fun getLoansConditions(): MutableLiveData<List<LoanCondition>> = loansConditions
 
     fun registerUser(userInfo: UserInfo) {
         apiService.registerUser(userInfo).enqueue(object: Callback<UserInfo>{
@@ -72,6 +82,35 @@ class Repository {
             }
         })
     }
+
+    fun getLoansConditionsFromServer(token: String) {
+        apiService.getLoansConditions(token).enqueue(object: Callback<LoanCondition> {
+            override fun onResponse(
+                call: Call<LoanCondition>,
+                response: Response<LoanCondition>
+            ) {
+                try {
+                    response.body()?.let {
+                        conditionsArray.add(it)
+                    }
+                    sizeOfCall--
+                    if (sizeOfCall > 0) getLoansConditionsFromServer(token)
+                    else {
+                        sizeOfCall = 5
+                        loansConditions.value = conditionsArray
+                        return
+                    }
+                } catch (e: IOException) {
+                    e.printStackTrace()
+                }
+              }
+
+            override fun onFailure(call: Call<LoanCondition>, t: Throwable) {
+
+            }
+        })
+    }
+
 
     private fun saveDataToDb(userData: User) {
         Executors.newSingleThreadExecutor().execute(
