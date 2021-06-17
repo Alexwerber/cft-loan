@@ -1,6 +1,7 @@
 package com.example.cft_loan.di.components
 
 import android.app.Application
+import com.example.cft_loan.data.Repository
 import com.example.cft_loan.di.modules.RetrofitModule
 import com.example.cft_loan.ui.activity.MainActivity
 import dagger.BindsInstance
@@ -19,5 +20,5 @@ interface AppComponents {
         fun build(): AppComponents?
     }
 
-    fun inject(mainActivity: MainActivity)
+    fun inject(repository: Repository)
 }
