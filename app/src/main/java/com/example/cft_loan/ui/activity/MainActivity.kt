@@ -10,6 +10,7 @@ import com.example.cft_loan.LoanApp
 import com.example.cft_loan.R
 import com.example.cft_loan.data.entities.UserInfo
 import com.example.cft_loan.data.remote.ApiService
+import com.example.cft_loan.ui.fragments.LoanFragment
 import com.example.cft_loan.viewmodel.LoanViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 import retrofit2.Call
@@ -27,11 +28,18 @@ class MainActivity : AppCompatActivity() {
         loanViewModel = ViewModelProvider(this).get(LoanViewModel::class.java)
 
         loanViewModel.userData.observe(this, {
-            it?.let { if(it.token != "") goToLoanList() }
+            it?.let { if(it.token != "") {
+                    goToLoanList()
+                    loanViewModel.userData.removeObservers(this)
+                }
+            }
         })
     }
 
     private fun goToLoanList() {
-        // go to loan fragment
+        this.supportFragmentManager
+                .beginTransaction()
+                .replace(R.id.fragment_container, LoanFragment())
+                .commit()
     }
 }
