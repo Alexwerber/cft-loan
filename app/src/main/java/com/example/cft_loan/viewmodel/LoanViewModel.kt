@@ -19,7 +19,7 @@ class LoanViewModel: ViewModel() {
     }
 
     fun getLoanListFromServer(token: String) {
-        repository.getLoanList(token)
+        repository.getLoanListFromServer(token)
     }
 
     fun getLoanList() {
