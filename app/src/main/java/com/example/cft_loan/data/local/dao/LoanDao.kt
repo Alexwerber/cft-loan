@@ -10,12 +10,6 @@ import com.example.cft_loan.data.entities.User
 
 @Dao
 interface LoanDao {
-    @Query("SELECT * FROM user WHERE id = 1")
-    fun getUserData(): LiveData<User>
-
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
-    fun saveUserData(user: User)
-
     @Query("SELECT * FROM loan")
     fun getLoans(): LiveData<List<Loan>>
 

@@ -1,12 +1,18 @@
 package com.example.cft_loan.data
 
+import android.app.Application
+import android.content.Context
+import android.content.SharedPreferences
 import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.cft_loan.LoanApp
 import com.example.cft_loan.data.entities.*
 import com.example.cft_loan.data.local.dao.LoanDao
 import com.example.cft_loan.data.remote.ApiService
+import com.example.cft_loan.di.constants.SharedPreferences.PREF_NAME
+import com.example.cft_loan.di.constants.SharedPreferences.TOKEN
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -16,26 +22,33 @@ import javax.inject.Inject
 
 class Repository {
     var sizeOfCall = 5
+    private var preferences: SharedPreferences
 
     @Inject
     lateinit var apiService: ApiService
     @Inject
     lateinit var loanDao: LoanDao
+    @Inject
+    lateinit var context: Context
 
     private val loansConditions: MutableLiveData<List<LoanCondition>> = MutableLiveData()
+    private var token: MutableLiveData<String> = MutableLiveData()
     private val conditionsArray = ArrayList<LoanCondition>()
 
     init {
         LoanApp.appComponents.inject(this)
+        preferences = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
     }
 
-    fun getUserData(): LiveData<User> = loanDao.getUserData()
     fun getLoanList(): LiveData<List<Loan>> = loanDao.getLoans()
+    fun getToken(): String? = preferences.getString(TOKEN, null)
+
+    fun checkWhenTokenChange(): MutableLiveData<String> = token
 
     fun getLoansConditions(): MutableLiveData<List<LoanCondition>> = loansConditions
 
     fun registerUser(userInfo: UserInfo) {
-        apiService.registerUser(userInfo).enqueue(object: Callback<UserInfo>{
+        apiService.registerUser(userInfo).enqueue(object : Callback<UserInfo> {
             override fun onResponse(call: Call<UserInfo>, response: Response<UserInfo>) {
                 response.isSuccessful.apply { loginUser(userInfo) }
             }
@@ -47,18 +60,14 @@ class Repository {
     }
 
     fun loginUser(userInfo: UserInfo) {
-        apiService.loginUser(userInfo).enqueue(object: Callback<String>{
+        apiService.loginUser(userInfo).enqueue(object : Callback<String> {
             override fun onResponse(call: Call<String>, response: Response<String>) {
                 response.isSuccessful.apply {
-                    saveDataToDb(UserBuilder()
-                            .setName(userInfo.name)
-                            .setPassword(userInfo.password)
-                            .setToken(response.body().toString())
-                            .build()
-                    )
+                    preferences.edit().putString(TOKEN, response.body()).apply()
+                    token.value = response.body()
 
                     getLoanListFromServer(response.body().toString())
-                 }
+                }
             }
 
             override fun onFailure(call: Call<String>, t: Throwable) {
@@ -68,7 +77,7 @@ class Repository {
     }
 
     fun getLoanListFromServer(token: String) {
-        apiService.getLoansList(token).enqueue(object: Callback<LoanList>{
+        apiService.getLoansList(token).enqueue(object : Callback<LoanList> {
             override fun onResponse(call: Call<LoanList>, response: Response<LoanList>) {
                 response.isSuccessful.apply {
                     response.body()?.let {
@@ -84,7 +93,7 @@ class Repository {
     }
 
     fun getLoansConditionsFromServer(token: String) {
-        apiService.getLoansConditions(token).enqueue(object: Callback<LoanCondition> {
+        apiService.getLoansConditions(token).enqueue(object : Callback<LoanCondition> {
             override fun onResponse(
                 call: Call<LoanCondition>,
                 response: Response<LoanCondition>
@@ -103,7 +112,7 @@ class Repository {
                 } catch (e: IOException) {
                     e.printStackTrace()
                 }
-              }
+            }
 
             override fun onFailure(call: Call<LoanCondition>, t: Throwable) {
 
@@ -112,15 +121,9 @@ class Repository {
     }
 
 
-    private fun saveDataToDb(userData: User) {
-        Executors.newSingleThreadExecutor().execute(
-                fun () {loanDao.saveUserData(userData)}
-        )
-    }
-
     private fun saveLoansToDb(loanList: List<Loan>) {
         Executors.newSingleThreadExecutor().execute(
-            fun () {loanDao.saveLoans(loanList)}
+            fun() { loanDao.saveLoans(loanList) }
         )
     }
 }

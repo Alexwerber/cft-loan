@@ -18,6 +18,14 @@ class RegistrationFragment: Fragment(R.layout.fragment_registration) {
         super.onCreate(savedInstanceState)
 
         loanViewModel = activity?.let { ViewModelProvider(it).get(LoanViewModel::class.java) }!!
+
+        loanViewModel.getToken()?.let {
+            requireActivity()
+                    .supportFragmentManager
+                    .beginTransaction()
+                    .replace(R.id.fragment_container, LoansFragment())
+                    .commit()
+        }
     }
 
     override fun onStart() {
