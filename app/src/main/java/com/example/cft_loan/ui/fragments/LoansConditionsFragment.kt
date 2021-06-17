@@ -6,8 +6,9 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.cft_loan.R
 import com.example.cft_loan.viewmodel.LoanViewModel
 
-class LoansConditions: Fragment(R.layout.fragment_loans_conditions) {
+class LoansConditionsFragment: Fragment(R.layout.fragment_loans_conditions) {
     private lateinit var loanViewModel: LoanViewModel
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -17,5 +18,7 @@ class LoansConditions: Fragment(R.layout.fragment_loans_conditions) {
 
     override fun onStart() {
         super.onStart()
+
+
     }
 }
