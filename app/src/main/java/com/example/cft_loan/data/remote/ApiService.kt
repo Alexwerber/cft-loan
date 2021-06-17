@@ -1,6 +1,7 @@
 package com.example.cft_loan.data.remote
 
 import com.example.cft_loan.data.entities.Loan
+import com.example.cft_loan.data.entities.LoanCondition
 import com.example.cft_loan.data.entities.LoanList
 import com.example.cft_loan.data.entities.UserInfo
 import retrofit2.Call
@@ -18,5 +19,8 @@ interface ApiService {
 
     @POST("login")
     fun loginUser(@Body userInfo: UserInfo): Call<String>
+
+    @GET("loans/conditions")
+    fun getLoansConditions(): Call<LoanCondition>
 
 }

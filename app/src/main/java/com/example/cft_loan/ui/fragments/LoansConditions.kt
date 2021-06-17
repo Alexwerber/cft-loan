@@ -5,9 +5,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.cft_loan.R
 import com.example.cft_loan.viewmodel.LoanViewModel
-import kotlinx.android.synthetic.main.fragment_loan_list.*
 
-class LoansFragment: Fragment(R.layout.fragment_loan_list) {
+class LoansConditions: Fragment(R.layout.fragment_loans_conditions) {
     private lateinit var loanViewModel: LoanViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -18,8 +17,5 @@ class LoansFragment: Fragment(R.layout.fragment_loan_list) {
 
     override fun onStart() {
         super.onStart()
-        go_to_loans_conditions.setOnClickListener() {
-
-        }
     }
 }
