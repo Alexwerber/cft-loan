@@ -33,6 +33,8 @@ class LoansFragment: Fragment(R.layout.fragment_loan_list) {
         })
 
         go_to_loans_conditions.setOnClickListener() {
+            loanViewModel.getToken()?.let { loanViewModel.loadLoanConditionsFromServer(it) }
+
             requireActivity().supportFragmentManager
                 .beginTransaction()
                 .replace(R.id.fragment_container, LoansConditionsFragment())
