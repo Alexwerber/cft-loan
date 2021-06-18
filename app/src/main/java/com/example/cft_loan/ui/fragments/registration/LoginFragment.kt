@@ -29,6 +29,9 @@ class LoginFragment: Fragment(R.layout.fragment_login) {
             if(checkInput.checkLogin(login) && checkInput.checkPassword(password)) {
                 val userInfo = UserInfo(login, password)
                 loanViewModel.loginUser(userInfo)
+            } else {
+                login_name.error = resources.getString(R.string.login_error)
+                login_password.error = resources.getString(R.string.password_error)
             }
         }
     }

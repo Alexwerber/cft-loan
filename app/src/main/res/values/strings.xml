@@ -1,13 +1,20 @@
 <resources>
+<!--    Titles-->
     <string name="app_name">ЦФТ займы</string>
+    <string name="loans_list_title">Список заявок</string>
+    <string name="conditions_title">Условия займа</string>
+    <string name="create_loan_title">Оформление</string>
+
+<!--    registration strings-->
     <string name="go_to_login"><u>Войти</u></string>
     <string name="are_you_already_registered">Вы уже зарегистрированы?</string>
-    <string name="confirm">подтверждаю</string>
+    <string name="confirm">подтвердить</string>
     <string name="password">Пароль</string>
     <string name="login">Логин</string>
     <string name="registration_header">Создать новый аккаут</string>
     <string name="login_header">Войти в аккаунт</string>
-    <string name="loans_list_title">Список заявок</string>
-    <string name="conditions_title">Условия займа</string>
-    <string name="create_loan_title">Оформление</string>
+
+<!--    error string-->
+    <string name="login_error">Логин должен быть больше 4 знаков</string>
+    <string name="password_error">Пароль не должен содержать пробелов</string>
 </resources>

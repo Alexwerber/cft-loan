@@ -1,5 +1,7 @@
 package com.example.cft_loan.ui.adapters
 
+import android.annotation.SuppressLint
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -32,10 +34,14 @@ class LoansListAdapter: RecyclerView.Adapter<LoansListAdapter.LoanViewHolder>() 
     override fun onBindViewHolder(holder: LoansListAdapter.LoanViewHolder, position: Int) {
         val postedLoan = loansList[position]
 
-        holder.anount.text = postedLoan.amount.toString()
-        holder.percent.text = postedLoan.percent.toString()
-        holder.period.text = postedLoan.period.toString()
-        holder.status.text = postedLoan.state
+        holder.anount.text = compareString(postedLoan.amount.toString(), " ₽")
+        holder.percent.text = compareString(postedLoan.percent.toString(), " %")
+        holder.status.text = postedLoan.state.toString()
+
+        when (postedLoan.state) {
+            "APPROVED" -> holder.status.setTextColor(Color.GREEN)
+            "REJECTED" -> holder.status.setTextColor(Color.RED)
+        }
 
         holder.root.setOnClickListener() {
             context.supportFragmentManager
@@ -50,10 +56,12 @@ class LoansListAdapter: RecyclerView.Adapter<LoansListAdapter.LoanViewHolder>() 
 
     class LoanViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         val anount = itemView.post_loan_amount
-        val period = itemView.post_loan_period
         val percent = itemView.post_loan_percent
         val status = itemView.post_loan_status
         val root = itemView.rootView
     }
+
+    private fun compareString(string: String, secondString: String): String =
+        "$string $secondString"
 
 }
