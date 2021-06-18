@@ -3,12 +3,16 @@ package com.example.cft_loan.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.example.cft_loan.data.Repository
-import com.example.cft_loan.data.entities.User
+import com.example.cft_loan.data.entities.PostLoan
 import com.example.cft_loan.data.entities.UserInfo
 
 class LoanViewModel: ViewModel() {
     private val repository = Repository()
-    var userData: LiveData<User> = repository.getUserData()
+    var firstLaunch = true
+
+    fun getToken(): String? = repository.getToken()
+
+    fun checkWhenTokenChange(): LiveData<String> = repository.checkWhenTokenChange()
 
     fun registerUser(userInfo: UserInfo) {
         repository.registerUser(userInfo)
@@ -18,13 +22,19 @@ class LoanViewModel: ViewModel() {
         repository.loginUser(userInfo)
     }
 
-    fun getGetLoanConditionsFromServer(token: String) {
+    fun loadLoanConditionsFromServer(token: String) {
         repository.getLoansConditionsFromServer(token)
     }
 
-    fun getLoanList() =
-        repository.getLoanList()
+    fun postLoan(token: String, loan: PostLoan) {
+        repository.postLoan(token, loan)
+    }
 
-    fun getLoansConditions() =
-        repository.getLoansConditions()
+    fun loadLoanListFromSerer(token: String) {
+        repository.getLoanListFromServer(token)
+    }
+
+    fun getLoanList() = repository.getLoanList()
+
+    fun getLoansConditions() = repository.getLoansConditions()
 }

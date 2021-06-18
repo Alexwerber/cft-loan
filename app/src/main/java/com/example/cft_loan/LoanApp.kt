@@ -12,6 +12,7 @@ class LoanApp: Application() {
     override fun onCreate() {
         super.onCreate()
 
-        appComponents = DaggerAppComponents.builder().application(this).build()!!
+        appComponents = DaggerAppComponents.builder().application(this).build()
+
     }
 }
