@@ -56,6 +56,11 @@ class CreateLoanFragment: Fragment(R.layout.fragment_create_loan) {
                     loanViewModel.postLoan(it, loan)
 
                     gotToLoansFragment()
+                } else {
+                    loan_amount.error = resources.getString(R.string.amount)
+                    loan_first_name.error = resources.getString(R.string.user_name)
+                    loan_last_name.error = resources.getString(R.string.user_name)
+                    loan_phone_number.error = resources.getString(R.string.user_phone)
                 }
         }
     }

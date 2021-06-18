@@ -18,6 +18,9 @@
 <!--    error string-->
     <string name="login_error">Логин должен быть больше 4 знаков</string>
     <string name="password_error">Пароль не должен содержать пробелов</string>
+    <string name="user_name">Поле не должно быть пустым</string>
+    <string name="user_phone">Не должен превышать 12 цифр</string>
+    <string name="amount">Сумма не должна превышать максимальную</string>
 
 <!--    loan info strings-->
     <string name="head_sum_of_loan">Сумма займа:</string>
