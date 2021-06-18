@@ -13,6 +13,5 @@ class LoanApp: Application() {
         super.onCreate()
 
         appComponents = DaggerAppComponents.builder().application(this).build()
-
     }
 }

@@ -7,6 +7,7 @@ import com.example.cft_loan.data.entities.PostLoan
 import com.example.cft_loan.data.entities.UserInfo
 
 class LoanViewModel: ViewModel() {
+    var firstLaunch = true
     private val repository = Repository()
 
     fun getToken(): String? = repository.getToken()

@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.cft_loan.R
 import com.example.cft_loan.data.entities.UserInfo
 import com.example.cft_loan.errorcheck.CheckLoginAndPassword
+import com.example.cft_loan.ui.fragments.loan.LoansFragment
 import com.example.cft_loan.viewmodel.LoanViewModel
 import kotlinx.android.synthetic.main.fragment_login.*
 

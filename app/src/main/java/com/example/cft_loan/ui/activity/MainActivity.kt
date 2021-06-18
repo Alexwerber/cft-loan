@@ -1,6 +1,7 @@
 package com.example.cft_loan.ui.activity
 
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.example.cft_loan.R
@@ -15,5 +16,19 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         loanViewModel = ViewModelProvider(this).get(LoanViewModel::class.java)
+
+        loanViewModel.checkWhenTokenChange().observe(this, {
+            if (it != null && loanViewModel.firstLaunch) {
+                loanViewModel.firstLaunch = false
+                goToLoansFragment()
+            }
+        })
         }
+
+    private fun goToLoansFragment() {
+        this.supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.fragment_container, LoansFragment())
+            .commit()
+    }
 }
