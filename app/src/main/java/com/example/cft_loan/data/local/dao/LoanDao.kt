@@ -14,4 +14,7 @@ interface LoanDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun saveLoans(loansList: List<Loan>)
+
+    @Query("SELECT * FROM loan WHERE id=:id")
+    fun getLoanById(id: Int): Loan
 }

@@ -10,6 +10,9 @@ class LoanViewModel: ViewModel() {
     private val repository = Repository()
 
     fun getToken(): String? = repository.getToken()
+    fun getLoanList() = repository.getLoanList()
+    fun getLoansConditions() = repository.getLoansConditions()
+    fun getLoanById(id: Int) = repository.getLoanById(id)
 
     fun checkWhenTokenChange(): LiveData<String> = repository.checkWhenTokenChange()
 
@@ -33,7 +36,4 @@ class LoanViewModel: ViewModel() {
         repository.getLoanListFromServer(token)
     }
 
-    fun getLoanList() = repository.getLoanList()
-
-    fun getLoansConditions() = repository.getLoansConditions()
 }
