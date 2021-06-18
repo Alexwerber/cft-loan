@@ -50,6 +50,8 @@ class CreateLoanFragment: Fragment(R.layout.fragment_create_loan) {
                                     .build()
 
                     loanViewModel.postLoan(it, loan)
+
+                    gotToLoansFragment()
                 }
         }
     }
@@ -58,4 +60,12 @@ class CreateLoanFragment: Fragment(R.layout.fragment_create_loan) {
         checkLoanInput.checkName(firstName) &&
         checkLoanInput.checkName(lastName) &&
         checkLoanInput.checkPhoneNumber(phoneNumber)
+
+    private fun gotToLoansFragment() {
+        activity?.let { it.supportFragmentManager
+                                     .beginTransaction()
+                                     .replace(R.id.fragment_container, LoansFragment())
+                                     .commit()
+        }
+    }
 }
