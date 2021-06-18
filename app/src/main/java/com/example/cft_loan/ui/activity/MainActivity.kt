@@ -20,7 +20,6 @@ class MainActivity : AppCompatActivity() {
         loanViewModel.checkWhenTokenChange().observe(this, {
             if (it != null && loanViewModel.firstLaunch) {
                 loanViewModel.firstLaunch = false
-                Log.i("wwww", "wwwww")
                 goToLoansFragment()
             }
         })
