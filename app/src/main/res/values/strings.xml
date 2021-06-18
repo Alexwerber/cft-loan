@@ -18,4 +18,12 @@
 <!--    error string-->
     <string name="login_error">Логин должен быть больше 4 знаков</string>
     <string name="password_error">Пароль не должен содержать пробелов</string>
+
+<!--    loan info strings-->
+    <string name="head_sum_of_loan">Сумма займа:</string>
+    <string name="head_percent">Процентная ставка:</string>
+    <string name="head_period">Период:</string>
+    <string name="head_info_name">Заемщик:</string>
+    <string name="head_status">Статус:</string>
+    <string name="head_adress">Адрес пункта выдачи…</string>
 </resources>

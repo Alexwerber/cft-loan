@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.cft_loan.R
 import com.example.cft_loan.data.entities.PostLoanBuilder
+import com.example.cft_loan.di.StringConverter.Companion.compareString
 import com.example.cft_loan.di.constants.BundleKeys.MAX_AMOUNT
 import com.example.cft_loan.di.constants.BundleKeys.PERCENT
 import com.example.cft_loan.di.constants.BundleKeys.PERIOD
@@ -29,11 +30,11 @@ class CreateLoanFragment: Fragment(R.layout.fragment_create_loan) {
 
         val percent = arguments?.getDouble(PERCENT)
         val period = arguments?.getInt(PERIOD)
-        val max_amount = arguments?.getLong(MAX_AMOUNT)
+        val maxAmount = arguments?.getLong(MAX_AMOUNT)
 
         loan_percent.text = compareString(percent.toString(), "%")
         loan_period.text = compareString(period.toString(), "дней")
-        loan_max_amount.text = compareString(max_amount.toString(), "₽")
+        loan_max_amount.text = compareString(maxAmount.toString(), "₽")
 
         post_loan_button.setOnClickListener() {
             val firstName = loan_first_name.text.toString()
@@ -58,9 +59,6 @@ class CreateLoanFragment: Fragment(R.layout.fragment_create_loan) {
                 }
         }
     }
-
-    private fun compareString(string: String, secondString: String): String =
-        "$string $secondString"
 
     private fun checkInput(firstName: String, lastName: String, phoneNumber: String): Boolean =
         checkLoanInput.checkName(firstName) &&

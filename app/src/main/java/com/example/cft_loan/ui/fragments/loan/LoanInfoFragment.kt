@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.cft_loan.R
 import com.example.cft_loan.data.entities.Loan
+import com.example.cft_loan.di.StringConverter.Companion.compareString
 import com.example.cft_loan.di.constants.BundleKeys.BUNDLE_ID
 import com.example.cft_loan.viewmodel.LoanViewModel
 import kotlinx.android.synthetic.main.fragment_loan_info.*
@@ -31,10 +32,11 @@ class LoanInfoFragment: Fragment(R.layout.fragment_loan_info) {
     }
 
     private fun initViews(let: Loan) {
-        loan_info_amount.text = let.amount.toString()
-        loan_info_name.text = let.firstName + " " + let.lastName
-        loan_info_percent.text = let.percent.toString()
-        loan_info_period.text = let.period.toString()
+        loan_info_amount.text = compareString(let.amount.toString(), "₽")
+        loan_info_name.text = compareString(let.firstName, let.lastName)
+        loan_info_percent.text = compareString(let.percent.toString(), "%")
+        loan_info_period.text = compareString(let.period.toString(), "дней")
         loan_info_status.text = let.state
     }
+
 }

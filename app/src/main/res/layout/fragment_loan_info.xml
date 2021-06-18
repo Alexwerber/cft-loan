@@ -9,7 +9,7 @@
     <TextView
         android:id="@+id/head_sum_of_loan"
         style="@style/loan_info_text"
-        android:text="Сумма займа: "
+        android:text="@string/head_sum_of_loan"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 
@@ -22,7 +22,7 @@
     <TextView
         android:id="@+id/head_percent"
         style="@style/loan_info_text"
-        android:text="Период:"
+        android:text="@string/head_percent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/head_sum_of_loan"/>
 
@@ -35,7 +35,7 @@
     <TextView
         android:id="@+id/head_period"
         style="@style/loan_info_text"
-        android:text="Процентная ставка:"
+        android:text="@string/head_period"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/head_percent"/>
 
@@ -48,7 +48,7 @@
     <TextView
         android:id="@+id/head_info_name"
         style="@style/loan_info_text"
-        android:text="Заемщик:"
+        android:text="@string/head_info_name"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/head_period"/>
 
@@ -61,7 +61,7 @@
     <TextView
         android:id="@+id/head_status"
         style="@style/loan_info_text"
-        android:text="Статус:"
+        android:text="@string/head_status"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/head_info_name"/>
 
@@ -75,7 +75,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_margin="8dp"
-        android:hint="Адрес пункта выдачи"
+        android:hint="@string/head_adress"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/head_status"
         app:layout_constraintBottom_toBottomOf="parent"/>
