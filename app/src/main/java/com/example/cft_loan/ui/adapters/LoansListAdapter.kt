@@ -7,6 +7,7 @@ import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cft_loan.R
 import com.example.cft_loan.data.entities.Loan
+import com.example.cft_loan.ui.fragments.loan.LoanInfoFragment
 import kotlinx.android.synthetic.main.item_loans_list.view.*
 
 class LoansListAdapter: RecyclerView.Adapter<LoansListAdapter.LoanViewHolder>() {
@@ -37,7 +38,11 @@ class LoansListAdapter: RecyclerView.Adapter<LoansListAdapter.LoanViewHolder>() 
         holder.status.text = postedLoan.state
 
         holder.root.setOnClickListener() {
-            //go to fragment with info about loan
+            context.supportFragmentManager
+                .beginTransaction()
+                        .add(R.id.fragment_container, LoanInfoFragment())
+                        .addToBackStack(null)
+                        .commit()
         }
     }
 

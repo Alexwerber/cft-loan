@@ -1,4 +1,4 @@
-package com.example.cft_loan.ui.fragments
+package com.example.cft_loan.ui.fragments.registration
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

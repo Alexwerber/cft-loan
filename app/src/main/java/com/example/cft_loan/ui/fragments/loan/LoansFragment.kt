@@ -1,4 +1,4 @@
-package com.example.cft_loan.ui.fragments
+package com.example.cft_loan.ui.fragments.loan
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -23,6 +23,8 @@ class LoansFragment: Fragment(R.layout.fragment_loan_list) {
 
     override fun onStart() {
         super.onStart()
+
+        activity?.title = resources.getString(R.string.loans_list_title)
 
         loans_recycler_view.apply {
             layoutManager = LinearLayoutManager(activity)

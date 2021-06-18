@@ -1,4 +1,4 @@
-package com.example.cft_loan.ui.fragments
+package com.example.cft_loan.ui.fragments.loan
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -22,6 +22,8 @@ class LoansConditionsFragment: Fragment(R.layout.fragment_loans_conditions) {
 
     override fun onStart() {
         super.onStart()
+
+        activity?.title = resources.getString(R.string.conditions_title)
 
         loanViewModel.getLoansConditions().observe(requireActivity(), {
             setLoanCondition(it)

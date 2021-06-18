@@ -1,4 +1,4 @@
-package com.example.cft_loan.ui.fragments
+package com.example.cft_loan.ui.fragments.loan
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -24,6 +24,9 @@ class CreateLoanFragment: Fragment(R.layout.fragment_create_loan) {
 
     override fun onStart() {
         super.onStart()
+
+        activity?.title = resources.getString(R.string.create_loan_title)
+
         val percent = arguments?.getDouble(PERCENT)
         val period = arguments?.getInt(PERIOD)
         val max_amount = arguments?.getLong(MAX_AMOUNT)

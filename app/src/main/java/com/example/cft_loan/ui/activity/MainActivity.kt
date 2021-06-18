@@ -1,11 +1,10 @@
 package com.example.cft_loan.ui.activity
 
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.example.cft_loan.R
-import com.example.cft_loan.ui.fragments.LoansFragment
+import com.example.cft_loan.ui.fragments.loan.LoansFragment
 import com.example.cft_loan.viewmodel.LoanViewModel
 
 class MainActivity : AppCompatActivity() {
