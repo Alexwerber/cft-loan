@@ -4,50 +4,81 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:layout_margin="8dp">
 
     <TextView
-        android:id="@+id/condition_period"
+        android:id="@+id/max_amount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="Максимальная сумма"
+        android:layout_marginTop="20dp"
+        android:textSize="16dp"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:text="45 DAYS"/>
+        app:layout_constraintVertical_chainStyle="packed"/>
 
     <TextView
         android:id="@+id/condition_max_amount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textSize="26sp"
+        android:layout_marginTop="16dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/condition_period"
-        android:text="15.4"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/max_amount"
+        android:text="20000"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:text="дней"
+        app:layout_constraintStart_toEndOf="@id/condition_period"
+        app:layout_constraintBaseline_toBaselineOf="@id/condition_period"/>
+
+    <TextView
+        android:id="@+id/condition_period"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/condition_max_amount"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="%"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintStart_toEndOf="@id/condition_percent"
+        app:layout_constraintBaseline_toBaselineOf="@id/condition_percent"/>
 
     <TextView
         android:id="@+id/condition_percent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="100000"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.9"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/go_to_create_loan"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:layout_marginTop="16dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/condition_percent"
-        android:text="Утвердить займ"/>
+        app:layout_constraintTop_toBottomOf="@id/condition_period"/>
 
     <Button
         android:id="@+id/next_loan_condition"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/go_to_create_loan"
-        android:text="Следующий"/>
+        android:layout_margin="16dp"
+        android:text="следующий"
+        app:layout_constraintTop_toBottomOf="@id/condition_percent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <Button
+        android:id="@+id/go_to_create_loan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:text="@string/confirm"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBaseline_toBaselineOf="@id/next_loan_condition"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

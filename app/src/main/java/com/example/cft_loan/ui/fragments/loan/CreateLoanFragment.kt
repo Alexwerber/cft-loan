@@ -1,4 +1,4 @@
-package com.example.cft_loan.ui.fragments
+package com.example.cft_loan.ui.fragments.loan
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -24,13 +24,16 @@ class CreateLoanFragment: Fragment(R.layout.fragment_create_loan) {
 
     override fun onStart() {
         super.onStart()
+
+        activity?.title = resources.getString(R.string.create_loan_title)
+
         val percent = arguments?.getDouble(PERCENT)
         val period = arguments?.getInt(PERIOD)
         val max_amount = arguments?.getLong(MAX_AMOUNT)
 
-        loan_percent.text = percent.toString()
-        loan_period.text = period.toString()
-        loan_max_amount.text = max_amount.toString()
+        loan_percent.text = compareString(percent.toString(), "%")
+        loan_period.text = compareString(period.toString(), "дней")
+        loan_max_amount.text = compareString(max_amount.toString(), "₽")
 
         post_loan_button.setOnClickListener() {
             val firstName = loan_first_name.text.toString()
@@ -55,6 +58,9 @@ class CreateLoanFragment: Fragment(R.layout.fragment_create_loan) {
                 }
         }
     }
+
+    private fun compareString(string: String, secondString: String): String =
+        "$string $secondString"
 
     private fun checkInput(firstName: String, lastName: String, phoneNumber: String): Boolean =
         checkLoanInput.checkName(firstName) &&

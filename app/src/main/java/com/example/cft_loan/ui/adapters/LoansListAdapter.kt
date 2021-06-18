@@ -1,5 +1,7 @@
 package com.example.cft_loan.ui.adapters
 
+import android.annotation.SuppressLint
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -7,6 +9,7 @@ import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cft_loan.R
 import com.example.cft_loan.data.entities.Loan
+import com.example.cft_loan.ui.fragments.loan.LoanInfoFragment
 import kotlinx.android.synthetic.main.item_loans_list.view.*
 
 class LoansListAdapter: RecyclerView.Adapter<LoansListAdapter.LoanViewHolder>() {
@@ -31,13 +34,21 @@ class LoansListAdapter: RecyclerView.Adapter<LoansListAdapter.LoanViewHolder>() 
     override fun onBindViewHolder(holder: LoansListAdapter.LoanViewHolder, position: Int) {
         val postedLoan = loansList[position]
 
-        holder.anount.text = postedLoan.amount.toString()
-        holder.percent.text = postedLoan.percent.toString()
-        holder.period.text = postedLoan.period.toString()
-        holder.status.text = postedLoan.state
+        holder.anount.text = compareString(postedLoan.amount.toString(), " ₽")
+        holder.percent.text = compareString(postedLoan.percent.toString(), " %")
+        holder.status.text = postedLoan.state.toString()
+
+        when (postedLoan.state) {
+            "APPROVED" -> holder.status.setTextColor(Color.GREEN)
+            "REJECTED" -> holder.status.setTextColor(Color.RED)
+        }
 
         holder.root.setOnClickListener() {
-            //go to fragment with info about loan
+            context.supportFragmentManager
+                .beginTransaction()
+                        .add(R.id.fragment_container, LoanInfoFragment())
+                        .addToBackStack(null)
+                        .commit()
         }
     }
 
@@ -45,10 +56,12 @@ class LoansListAdapter: RecyclerView.Adapter<LoansListAdapter.LoanViewHolder>() 
 
     class LoanViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         val anount = itemView.post_loan_amount
-        val period = itemView.post_loan_period
         val percent = itemView.post_loan_percent
         val status = itemView.post_loan_status
         val root = itemView.rootView
     }
+
+    private fun compareString(string: String, secondString: String): String =
+        "$string $secondString"
 
 }
