@@ -18,8 +18,6 @@ import java.util.concurrent.Executors
 import javax.inject.Inject
 
 class Repository {
-    private var preferences: SharedPreferences
-
     @Inject
     lateinit var apiService: ApiService
     @Inject
@@ -29,6 +27,7 @@ class Repository {
 
     private val loansConditions: MutableLiveData<LoanCondition> = MutableLiveData()
     private var token: MutableLiveData<String> = MutableLiveData()
+    private var preferences: SharedPreferences
 
     init {
         LoanApp.appComponents.inject(this)

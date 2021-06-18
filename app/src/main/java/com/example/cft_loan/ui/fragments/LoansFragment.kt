@@ -17,6 +17,7 @@ class LoansFragment: Fragment(R.layout.fragment_loan_list) {
         super.onCreate(savedInstanceState)
 
         loanViewModel = activity?.let { ViewModelProvider(it).get(LoanViewModel::class.java) }!!
+
         loanViewModel.getToken()?.let { loanViewModel.loadLoanListFromSerer(it) }
     }
 
