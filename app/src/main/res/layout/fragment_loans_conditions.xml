@@ -31,37 +31,41 @@
         android:text="20000"/>
 
     <TextView
+        android:id="@+id/head_condition_period"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:text="дней"
-        app:layout_constraintStart_toEndOf="@id/condition_period"
-        app:layout_constraintBaseline_toBaselineOf="@id/condition_period"/>
+        android:layout_marginTop="16dp"
+        android:layout_marginRight="8dp"
+        android:text="Период: "
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/condition_max_amount"/>
 
     <TextView
         android:id="@+id/condition_period"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="16sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/condition_max_amount"/>
+        app:layout_constraintStart_toEndOf="@id/head_condition_period"
+        app:layout_constraintBaseline_toBaselineOf="@id/head_condition_period"/>
 
     <TextView
+        android:id="@+id/head_condition_percent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="%"
-        android:layout_marginLeft="8dp"
-        app:layout_constraintStart_toEndOf="@id/condition_percent"
-        app:layout_constraintBaseline_toBaselineOf="@id/condition_percent"/>
+        android:text="Процентная ставка: "
+        android:layout_marginTop="16dp"
+        android:layout_marginRight="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/condition_period"/>
 
     <TextView
         android:id="@+id/condition_percent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="16sp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/condition_period"/>
+        app:layout_constraintStart_toEndOf="@id/head_condition_percent"
+        app:layout_constraintBaseline_toBaselineOf="@id/head_condition_percent"/>
+
 
     <Button
         android:id="@+id/next_loan_condition"

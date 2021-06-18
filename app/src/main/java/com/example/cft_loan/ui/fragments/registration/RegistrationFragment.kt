@@ -21,12 +21,6 @@ class RegistrationFragment: Fragment(R.layout.fragment_registration) {
         loanViewModel = activity?.let { ViewModelProvider(it).get(LoanViewModel::class.java) }!!
 
         loanViewModel.getToken()?.let { goToLoansFragment() }
-
-        loanViewModel.checkWhenTokenChange().observe(this, {
-            if (it != null) {
-                goToLoansFragment()
-            }
-        })
     }
 
     private fun goToLoansFragment() {
@@ -57,15 +51,9 @@ class RegistrationFragment: Fragment(R.layout.fragment_registration) {
                 it.supportFragmentManager
                      .beginTransaction()
                      .replace(R.id.fragment_container, LoginFragment())
-                     .addToBackStack(null)
                      .commit()
             }
         }
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        loanViewModel.checkWhenTokenChange().removeObservers(this)
     }
 
 }

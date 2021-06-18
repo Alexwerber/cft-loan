@@ -58,6 +58,7 @@
         android:id="@+id/loan_amount"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:inputType="number"
         android:singleLine="true"/>
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -72,6 +73,7 @@
             android:id="@+id/loan_first_name"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:inputType="textPersonName"
             android:singleLine="true"/>
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -86,6 +88,7 @@
             android:id="@+id/loan_last_name"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:inputType="textPersonName"
             android:singleLine="true"/>
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -100,6 +103,7 @@
             android:id="@+id/loan_phone_number"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:inputType="phone"
             android:singleLine="true"/>
 
     </com.google.android.material.textfield.TextInputLayout>

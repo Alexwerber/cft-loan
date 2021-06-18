@@ -121,4 +121,6 @@ class Repository {
             fun() { loanDao.saveLoans(loanList) }
         )
     }
+
+    fun getLoanById(id: Int) = loanDao.getLoanById(id)
 }

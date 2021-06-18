@@ -7,9 +7,13 @@ import com.example.cft_loan.data.entities.PostLoan
 import com.example.cft_loan.data.entities.UserInfo
 
 class LoanViewModel: ViewModel() {
+    var firstLaunch = true
     private val repository = Repository()
 
     fun getToken(): String? = repository.getToken()
+    fun getLoanList() = repository.getLoanList()
+    fun getLoansConditions() = repository.getLoansConditions()
+    fun getLoanById(id: Int) = repository.getLoanById(id)
 
     fun checkWhenTokenChange(): LiveData<String> = repository.checkWhenTokenChange()
 
@@ -33,7 +37,4 @@ class LoanViewModel: ViewModel() {
         repository.getLoanListFromServer(token)
     }
 
-    fun getLoanList() = repository.getLoanList()
-
-    fun getLoansConditions() = repository.getLoansConditions()
 }

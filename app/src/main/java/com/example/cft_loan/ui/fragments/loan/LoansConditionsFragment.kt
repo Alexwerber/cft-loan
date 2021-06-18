@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.cft_loan.R
 import com.example.cft_loan.data.entities.LoanCondition
+import com.example.cft_loan.di.StringConverter.Companion.compareString
 import com.example.cft_loan.di.constants.BundleKeys.MAX_AMOUNT
 import com.example.cft_loan.di.constants.BundleKeys.PERCENT
 import com.example.cft_loan.di.constants.BundleKeys.PERIOD
@@ -55,9 +56,9 @@ class LoansConditionsFragment: Fragment(R.layout.fragment_loans_conditions) {
     }
 
     private fun setLoanCondition(loanCondition: LoanCondition) {
-        condition_period.text = loanCondition.period.toString()
-        condition_max_amount.text = loanCondition.maxAmount.toString()
-        condition_percent.text = loanCondition.percent.toString()
+        condition_period.text = compareString(loanCondition.period.toString(), "дней")
+        condition_max_amount.text = compareString(loanCondition.maxAmount.toString(), "₽")
+        condition_percent.text = compareString(loanCondition.percent.toString(), "%")
     }
 
     private fun fillDataToCreateNewLoan(value: LoanCondition): Bundle = Bundle().apply {

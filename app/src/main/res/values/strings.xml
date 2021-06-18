@@ -4,6 +4,7 @@
     <string name="loans_list_title">Список заявок</string>
     <string name="conditions_title">Условия займа</string>
     <string name="create_loan_title">Оформление заявок</string>
+    <string name="loan_info">Информация о займе</string>
 
 <!--    registration strings-->
     <string name="go_to_login"><u>Войти</u></string>
@@ -17,4 +18,15 @@
 <!--    error string-->
     <string name="login_error">Логин должен быть больше 4 знаков</string>
     <string name="password_error">Пароль не должен содержать пробелов</string>
+    <string name="user_name">Поле не должно быть пустым</string>
+    <string name="user_phone">Не должен превышать 12 цифр</string>
+    <string name="amount">Сумма не должна превышать максимальную</string>
+
+<!--    loan info strings-->
+    <string name="head_sum_of_loan">Сумма займа:</string>
+    <string name="head_percent">Процентная ставка:</string>
+    <string name="head_period">Период:</string>
+    <string name="head_info_name">Заемщик:</string>
+    <string name="head_status">Статус:</string>
+    <string name="head_adress">Адрес пункта выдачи…</string>
 </resources>
