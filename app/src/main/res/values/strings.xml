@@ -4,6 +4,7 @@
     <string name="loans_list_title">Список заявок</string>
     <string name="conditions_title">Условия займа</string>
     <string name="create_loan_title">Оформление заявок</string>
+    <string name="loan_info">Информация о займе</string>
 
 <!--    registration strings-->
     <string name="go_to_login"><u>Войти</u></string>

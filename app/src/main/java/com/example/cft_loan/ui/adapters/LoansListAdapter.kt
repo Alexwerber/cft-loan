@@ -2,6 +2,7 @@ package com.example.cft_loan.ui.adapters
 
 import android.annotation.SuppressLint
 import android.graphics.Color
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,6 +10,7 @@ import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cft_loan.R
 import com.example.cft_loan.data.entities.Loan
+import com.example.cft_loan.di.constants.BundleKeys.BUNDLE_ID
 import com.example.cft_loan.ui.fragments.loan.LoanInfoFragment
 import kotlinx.android.synthetic.main.item_loans_list.view.*
 
@@ -44,9 +46,14 @@ class LoansListAdapter: RecyclerView.Adapter<LoansListAdapter.LoanViewHolder>() 
         }
 
         holder.root.setOnClickListener() {
+            val bundle = Bundle().apply {  putInt(BUNDLE_ID, postedLoan.id) }
+            val loanInfoFragment = LoanInfoFragment()
+
+            loanInfoFragment.arguments = bundle
+
             context.supportFragmentManager
                 .beginTransaction()
-                        .add(R.id.fragment_container, LoanInfoFragment())
+                        .replace(R.id.fragment_container, loanInfoFragment)
                         .addToBackStack(null)
                         .commit()
         }

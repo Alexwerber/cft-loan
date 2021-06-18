@@ -4,4 +4,5 @@ object BundleKeys {
     const val PERIOD = "PERIOD"
     const val PERCENT = "PERCENT"
     const val MAX_AMOUNT = "MAX_AMOUNT"
+    const val BUNDLE_ID = "ID"
 }
