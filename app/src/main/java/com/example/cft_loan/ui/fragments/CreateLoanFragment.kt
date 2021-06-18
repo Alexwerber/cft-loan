@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.cft_loan.R
+import com.example.cft_loan.data.entities.PostLoanBuilder
 import com.example.cft_loan.di.constants.BundleKeys.MAX_AMOUNT
 import com.example.cft_loan.di.constants.BundleKeys.PERCENT
 import com.example.cft_loan.di.constants.BundleKeys.PERIOD
@@ -23,10 +24,13 @@ class CreateLoanFragment: Fragment(R.layout.fragment_create_loan) {
 
     override fun onStart() {
         super.onStart()
+        val percent = arguments?.getDouble(PERCENT)
+        val period = arguments?.getInt(PERIOD)
+        val max_amount = arguments?.getLong(MAX_AMOUNT)
 
-        loan_percent.text = arguments?.getDouble(PERCENT).toString()
-        loan_period.text = arguments?.getInt(PERIOD).toString()
-        loan_max_amount.text = arguments?.getLong(MAX_AMOUNT).toString()
+        loan_percent.text = percent.toString()
+        loan_period.text = period.toString()
+        loan_max_amount.text = max_amount.toString()
 
         post_loan_button.setOnClickListener() {
             val firstName = loan_first_name.text.toString()
@@ -36,8 +40,16 @@ class CreateLoanFragment: Fragment(R.layout.fragment_create_loan) {
 
             if (checkInput(firstName, lastName, phoneNumber) && amount.toLong() < arguments?.getLong(MAX_AMOUNT)!!)
                 loanViewModel.getToken()?.let {
-                    //val user = UserBuilder().setFirsName().setLastName().setPhoneNumber()
-                    //loanViewModel.postLoan(it, )
+                    val loan = PostLoanBuilder()
+                                    .setAmount(amount.toLong())
+                                    .setFirsName(firstName)
+                                    .setLastName(lastName)
+                                    .setPhoneNumber(phoneNumber)
+                                    .setPercent(percent!!)
+                                    .setPeriod(period!!)
+                                    .build()
+
+                    loanViewModel.postLoan(it, loan)
                 }
         }
     }

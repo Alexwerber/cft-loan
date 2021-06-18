@@ -120,6 +120,19 @@ class Repository {
         })
     }
 
+    fun postLoan(token: String, loan: PostLoan) {
+        apiService.postLoan(token, loan).enqueue(object: Callback<Loan> {
+            override fun onResponse(call: Call<Loan>, response: Response<Loan>) {
+
+            }
+
+            override fun onFailure(call: Call<Loan>, t: Throwable) {
+
+            }
+
+        })
+    }
+
 
     private fun saveLoansToDb(loanList: List<Loan>) {
         Executors.newSingleThreadExecutor().execute(

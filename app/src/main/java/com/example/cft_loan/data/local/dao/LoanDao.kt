@@ -6,7 +6,6 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.cft_loan.data.entities.Loan
-import com.example.cft_loan.data.entities.User
 
 @Dao
 interface LoanDao {

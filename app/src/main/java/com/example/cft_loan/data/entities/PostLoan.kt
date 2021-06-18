@@ -1,6 +1,6 @@
 package com.example.cft_loan.data.entities
 
-data class User(
+data class PostLoan(
         var amount: Long?,
         var firstName: String?,
         var lastName: String?,
@@ -26,7 +26,7 @@ class PostLoanBuilder() {
         fun setPhoneNumber(value: String): PostLoanBuilder = this.apply { phoneNumber = value }
 
         fun build() =
-                User(
+                PostLoan(
                         amount = amount,
                         phoneNumber = phoneNumber,
                         firstName = firstName,

@@ -1,9 +1,9 @@
 package com.example.cft_loan.viewmodel
 
-import android.content.SharedPreferences
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.example.cft_loan.data.Repository
+import com.example.cft_loan.data.entities.PostLoan
 import com.example.cft_loan.data.entities.UserInfo
 
 class LoanViewModel: ViewModel() {
@@ -24,6 +24,10 @@ class LoanViewModel: ViewModel() {
 
     fun loadGetLoanConditionsFromServer(token: String) {
         repository.getLoansConditionsFromServer(token)
+    }
+
+    fun postLoan(token: String, loan: PostLoan) {
+        repository.postLoan(token, loan)
     }
 
     fun getLoanList() = repository.getLoanList()
