@@ -9,7 +9,7 @@ import com.example.cft_loan.R
 import com.example.cft_loan.data.entities.Loan
 import kotlinx.android.synthetic.main.item_loans_list.view.*
 
-class LoansListAdapter: RecyclerView.Adapter<LoansListAdapter.ViewHolder>() {
+class LoansListAdapter: RecyclerView.Adapter<LoansListAdapter.LoanViewHolder>() {
     private lateinit var context: FragmentActivity
     private var loansList: List<Loan> = emptyList()
 
@@ -18,17 +18,17 @@ class LoansListAdapter: RecyclerView.Adapter<LoansListAdapter.ViewHolder>() {
         notifyDataSetChanged()
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LoansListAdapter.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LoansListAdapter.LoanViewHolder {
         context = parent.context as FragmentActivity
 
         val view = LayoutInflater
                         .from(parent.context)
                         .inflate(R.layout.item_loans_list, parent, false)
 
-        return ViewHolder(view)
+        return LoanViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: LoansListAdapter.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: LoansListAdapter.LoanViewHolder, position: Int) {
         val postedLoan = loansList[position]
 
         holder.anount.text = postedLoan.amount.toString()
@@ -39,7 +39,7 @@ class LoansListAdapter: RecyclerView.Adapter<LoansListAdapter.ViewHolder>() {
 
     override fun getItemCount(): Int = loansList.size
 
-    class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
+    class LoanViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         val anount = itemView.post_loan_amount
         val period = itemView.post_loan_period
         val percent = itemView.post_loan_percent

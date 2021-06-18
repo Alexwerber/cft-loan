@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.cft_loan.R
 import com.example.cft_loan.ui.adapters.LoansConditionsAdapter
+import com.example.cft_loan.ui.adapters.LoansListAdapter
 import com.example.cft_loan.viewmodel.LoanViewModel
 import kotlinx.android.synthetic.main.fragment_loan_list.*
 import kotlinx.android.synthetic.main.fragment_loans_conditions.*
@@ -19,7 +20,7 @@ class LoansConditionsFragment: Fragment(R.layout.fragment_loans_conditions) {
 
         loanViewModel = activity?.let { ViewModelProvider(it).get(LoanViewModel::class.java) }!!
 
-        loanViewModel.getToken()?.let { loanViewModel.loadGetLoanConditionsFromServer(it) }
+        loanViewModel.getToken()?.let { loanViewModel.loadLoanConditionsFromServer(it) }
     }
 
     override fun onStart() {

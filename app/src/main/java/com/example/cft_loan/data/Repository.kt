@@ -1,18 +1,15 @@
 package com.example.cft_loan.data
 
-import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
-import android.util.Log
-import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.cft_loan.LoanApp
 import com.example.cft_loan.data.entities.*
 import com.example.cft_loan.data.local.dao.LoanDao
 import com.example.cft_loan.data.remote.ApiService
-import com.example.cft_loan.di.constants.SharedPreferences.PREF_NAME
-import com.example.cft_loan.di.constants.SharedPreferences.TOKEN
+import com.example.cft_loan.di.constants.SharedPreferencesKeys.PREF_NAME
+import com.example.cft_loan.di.constants.SharedPreferencesKeys.TOKEN
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -77,16 +74,16 @@ class Repository {
     }
 
     fun getLoanListFromServer(token: String) {
-        apiService.getLoansList(token).enqueue(object : Callback<LoanList> {
-            override fun onResponse(call: Call<LoanList>, response: Response<LoanList>) {
+        apiService.getLoansList(token).enqueue(object : Callback<List<Loan>> {
+            override fun onResponse(call: Call<List<Loan>>, response: Response<List<Loan>>) {
                 response.isSuccessful.apply {
                     response.body()?.let {
-                        saveLoansToDb(it.loanList)
+                        saveLoansToDb(it)
                     }
                 }
             }
 
-            override fun onFailure(call: Call<LoanList>, t: Throwable) {
+            override fun onFailure(call: Call<List<Loan>>, t: Throwable) {
 
             }
         })

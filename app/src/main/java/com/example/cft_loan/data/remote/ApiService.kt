@@ -18,6 +18,6 @@ interface ApiService {
     fun getLoansConditions(@Header("Authorization") token: String): Call<LoanCondition>
 
     @GET("loans/all")
-    fun getLoansList(@Header("Authorization") token: String): Call<LoanList>
+    fun getLoansList(@Header("Authorization") token: String): Call<List<Loan>>
 
 }

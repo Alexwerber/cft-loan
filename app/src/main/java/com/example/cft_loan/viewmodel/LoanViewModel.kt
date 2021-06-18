@@ -22,12 +22,16 @@ class LoanViewModel: ViewModel() {
         repository.loginUser(userInfo)
     }
 
-    fun loadGetLoanConditionsFromServer(token: String) {
+    fun loadLoanConditionsFromServer(token: String) {
         repository.getLoansConditionsFromServer(token)
     }
 
     fun postLoan(token: String, loan: PostLoan) {
         repository.postLoan(token, loan)
+    }
+
+    fun loadLoanListFromSerer(token: String) {
+        repository.getLoanListFromServer(token)
     }
 
     fun getLoanList() = repository.getLoanList()
