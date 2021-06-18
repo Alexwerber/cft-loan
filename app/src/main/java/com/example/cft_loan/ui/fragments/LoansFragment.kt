@@ -17,6 +17,7 @@ class LoansFragment: Fragment(R.layout.fragment_loan_list) {
         super.onCreate(savedInstanceState)
 
         loanViewModel = activity?.let { ViewModelProvider(it).get(LoanViewModel::class.java) }!!
+
         loanViewModel.getToken()?.let { loanViewModel.loadLoanListFromSerer(it) }
     }
 
@@ -33,6 +34,8 @@ class LoansFragment: Fragment(R.layout.fragment_loan_list) {
         })
 
         go_to_loans_conditions.setOnClickListener() {
+            loanViewModel.getToken()?.let { loanViewModel.loadLoanConditionsFromServer(it) }
+
             requireActivity().supportFragmentManager
                 .beginTransaction()
                 .replace(R.id.fragment_container, LoansConditionsFragment())

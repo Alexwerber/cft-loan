@@ -35,6 +35,10 @@ class LoansListAdapter: RecyclerView.Adapter<LoansListAdapter.LoanViewHolder>() 
         holder.percent.text = postedLoan.percent.toString()
         holder.period.text = postedLoan.period.toString()
         holder.status.text = postedLoan.state
+
+        holder.root.setOnClickListener() {
+            //go to fragment with info about loan
+        }
     }
 
     override fun getItemCount(): Int = loansList.size

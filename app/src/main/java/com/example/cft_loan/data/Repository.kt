@@ -18,9 +18,6 @@ import java.util.concurrent.Executors
 import javax.inject.Inject
 
 class Repository {
-    var sizeOfCall = 5
-    private var preferences: SharedPreferences
-
     @Inject
     lateinit var apiService: ApiService
     @Inject
@@ -28,9 +25,9 @@ class Repository {
     @Inject
     lateinit var context: Context
 
-    private val loansConditions: MutableLiveData<List<LoanCondition>> = MutableLiveData()
+    private val loansConditions: MutableLiveData<LoanCondition> = MutableLiveData()
     private var token: MutableLiveData<String> = MutableLiveData()
-    private val conditionsArray = ArrayList<LoanCondition>()
+    private var preferences: SharedPreferences
 
     init {
         LoanApp.appComponents.inject(this)
@@ -39,10 +36,9 @@ class Repository {
 
     fun getLoanList(): LiveData<List<Loan>> = loanDao.getLoans()
     fun getToken(): String? = preferences.getString(TOKEN, null)
+    fun getLoansConditions(): MutableLiveData<LoanCondition> = loansConditions
 
     fun checkWhenTokenChange(): MutableLiveData<String> = token
-
-    fun getLoansConditions(): MutableLiveData<List<LoanCondition>> = loansConditions
 
     fun registerUser(userInfo: UserInfo) {
         apiService.registerUser(userInfo).enqueue(object : Callback<UserInfo> {
@@ -95,19 +91,8 @@ class Repository {
                 call: Call<LoanCondition>,
                 response: Response<LoanCondition>
             ) {
-                try {
-                    response.body()?.let {
-                        conditionsArray.add(it)
-                    }
-                    sizeOfCall--
-                    if (sizeOfCall > 0) getLoansConditionsFromServer(token)
-                    else {
-                        sizeOfCall = 5
-                        loansConditions.value = conditionsArray
-                        return
-                    }
-                } catch (e: IOException) {
-                    e.printStackTrace()
+                response.body()?.let {
+                    loansConditions.value = it
                 }
             }
 
