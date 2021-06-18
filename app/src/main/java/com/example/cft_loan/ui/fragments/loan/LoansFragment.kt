@@ -19,6 +19,10 @@ class LoansFragment: Fragment(R.layout.fragment_loan_list) {
         loanViewModel = activity?.let { ViewModelProvider(it).get(LoanViewModel::class.java) }!!
 
         loanViewModel.getToken()?.let { loanViewModel.loadLoanListFromSerer(it) }
+
+        loanViewModel.getLoanList().observe(requireActivity(), {
+            adapter.setData(it)
+        })
     }
 
     override fun onStart() {
@@ -30,10 +34,6 @@ class LoansFragment: Fragment(R.layout.fragment_loan_list) {
             layoutManager = LinearLayoutManager(activity)
             adapter = this@LoansFragment.adapter
         }
-
-        loanViewModel.getLoanList().observe(requireActivity(), {
-            adapter.setData(it)
-        })
 
         go_to_loans_conditions.setOnClickListener() {
             loanViewModel.getToken()?.let { loanViewModel.loadLoanConditionsFromServer(it) }
