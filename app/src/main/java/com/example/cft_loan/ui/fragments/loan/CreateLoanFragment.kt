@@ -31,9 +31,9 @@ class CreateLoanFragment: Fragment(R.layout.fragment_create_loan) {
         val period = arguments?.getInt(PERIOD)
         val max_amount = arguments?.getLong(MAX_AMOUNT)
 
-        loan_percent.text = percent.toString()
-        loan_period.text = period.toString()
-        loan_max_amount.text = max_amount.toString()
+        loan_percent.text = compareString(percent.toString(), "%")
+        loan_period.text = compareString(period.toString(), "дней")
+        loan_max_amount.text = compareString(max_amount.toString(), "₽")
 
         post_loan_button.setOnClickListener() {
             val firstName = loan_first_name.text.toString()
@@ -58,6 +58,9 @@ class CreateLoanFragment: Fragment(R.layout.fragment_create_loan) {
                 }
         }
     }
+
+    private fun compareString(string: String, secondString: String): String =
+        "$string $secondString"
 
     private fun checkInput(firstName: String, lastName: String, phoneNumber: String): Boolean =
         checkLoanInput.checkName(firstName) &&

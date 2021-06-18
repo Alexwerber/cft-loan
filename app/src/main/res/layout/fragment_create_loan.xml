@@ -8,10 +8,31 @@
     android:orientation="vertical">
 
     <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Максимальная сумма заявки:"/>
+
+    <TextView
+        android:id="@+id/loan_max_amount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="26sp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Период возврата:"/>
+
+    <TextView
         android:id="@+id/loan_period"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="26sp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Процентная ставка:"/>
 
     <TextView
         android:id="@+id/loan_percent"
@@ -20,10 +41,12 @@
         android:textSize="26sp"/>
 
     <TextView
-        android:id="@+id/loan_max_amount"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="26sp"/>
+        android:gravity="center"
+        android:text="Заявка:"
+        android:textSize="12dp"
+        android:layout_marginBottom="8dp"/>
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
